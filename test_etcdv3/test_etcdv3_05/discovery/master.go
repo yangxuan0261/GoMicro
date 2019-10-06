@@ -78,6 +78,13 @@ func (m *EtcdMaster) WatchNodes() {
 		for _, ev := range wresp.Events {
 			switch ev.Type {
 			case clientv3.EventTypePut:
+				var action string
+				if ev.IsCreate() {
+					action = "create"
+				} else if ev.IsModify() {
+					action = "update"
+				}
+				fmt.Printf("--- action is:%s\n", action)
 				fmt.Printf("[%s] dir:%q, value:%q\n", ev.Type, ev.Kv.Key, ev.Kv.Value)
 				info := NewEtcdNode(ev)
 				m.addNode(string(ev.Kv.Key), info)
@@ -137,4 +144,5 @@ func (m *EtcdMaster) GetNodeRandom() (EtcdNode, bool) {
 		idx = idx - 1
 	}
 	return EtcdNode{}, false
+}
 }

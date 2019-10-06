@@ -116,6 +116,24 @@ go run main.go --selector=cache --registry=etcdv3 --registry_address=http://192.
 
 [![etcd-list.png](https://i.loli.net/2019/06/21/5d0ca52a667dd46348.png)](https://i.loli.net/2019/06/21/5d0ca52a667dd46348.png)
 
+
+
+可使用 micro web 段查看
+
+```json
+$ mainWithEtcdv3.exe --selector=cache --registry=etcdv3 --registry_address=http://127.0.0.1:2379 web
+```
+
+访问: http://localhost:8082/registry
+
+![](http://yxbl.itengshe.com/20191006140608-1.png)
+
+命令查看: `list services`
+
+![](http://yxbl.itengshe.com/20191006140704-1.png)
+
+
+
 ### 浏览器访问Micro Api
 http://localhost:8080/greeter/say/hello?name=John
 
