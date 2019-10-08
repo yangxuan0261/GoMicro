@@ -46,7 +46,7 @@ func main() {
 		for {
 			wr := <-watchChan
 			if str, err := toString(wr); err == nil {
-				fmt.Printf("%s\n", str)
+				fmt.Printf("--- watch: %s\n", str)
 			} else {
 				glog.Error(err.Error())
 			}
