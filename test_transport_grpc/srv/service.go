@@ -10,6 +10,8 @@ import (
 	"github.com/micro/go-micro/transport/grpc"
 )
 
+// 官方默认使用的是 http
+
 type User struct{}
 
 func (u *User) Hello(ctx context.Context, req *proto.Request, res *proto.Response) error {
