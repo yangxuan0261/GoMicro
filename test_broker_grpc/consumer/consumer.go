@@ -8,6 +8,8 @@ import (
 	"github.com/micro/go-micro/config/cmd"
 
 	"github.com/micro/go-plugins/broker/grpc"
+
+	micro "github.com/micro/go-micro"
 )
 
 // 官方demo示例: src/github.com/micro/examples/broker/producer/producer.go
@@ -18,17 +20,6 @@ var (
 )
 
 var grpcBroker broker.Broker
-
-// Example of a shared subscription which receives a subset of messages
-func sharedSub() {
-	_, err := grpcBroker.Subscribe(topic, func(p broker.Event) error {
-		fmt.Println("[sub] received message:", string(p.Message().Body), "header", p.Message().Header)
-		return nil
-	})
-	if err != nil {
-		fmt.Println(err)
-	}
-}
 
 // Example of a subscription which receives all the messages
 func sub() {
@@ -53,6 +44,20 @@ func main() {
 		log.Fatalf("Broker Connect error: %v", err)
 	}
 
-	sub()
-	select {}
+	go sub()
+
+	service := micro.NewService(
+		micro.Name("test_broker_grpc_consumer"),
+		micro.Broker(grpcBroker),
+	)
+
+	service.Init()
+
+	// grpcBroker == service.Server().Options().Broker
+	// log.Printf("--- addr1:%p\n", grpcBroker)
+	// log.Printf("--- addr2:%p\n", service.Server().Options().Broker)
+
+	if err := service.Run(); err != nil {
+		fmt.Println(err)
+	}
 }
