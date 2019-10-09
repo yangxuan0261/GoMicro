@@ -23,13 +23,23 @@ func (s *Say) Hello(ctx context.Context, req *demo.Request, rsp *demo.Response) 
 }
 
 func DumpRegistryResult(rr *registry.Result) {
-	log.Printf("------ watch, action:%s, service:%v\n", rr.Action, rr.Service)
+	log.Printf("------ watch, action: [%s], service:%v\n", rr.Action, rr.Service)
+	log.Printf("--- Metadata, len:%d\n", len(rr.Service.Metadata))
 	for k, v := range rr.Service.Metadata {
 		log.Printf("Metadata, k:%s, v:%s\n", k, v)
 	}
 
+	log.Printf("--- Endpoints, len:%d\n", len(rr.Service.Endpoints))
 	for i, v := range rr.Service.Endpoints {
 		log.Printf("Endpoints, i:%d, v:%v\n", i, v)
+	}
+
+	log.Printf("--- Nodes, len:%d\n", len(rr.Service.Nodes))
+	for i, v := range rr.Service.Nodes { // 发现的 服务 都在 Nodes 中
+		log.Printf("Nodes, i:%d, Id:%s, Address:%s\n", i, v.Id, v.Address)
+		for k, v := range v.Metadata {
+			log.Printf("Metadata, k:%s, v:%s\n", k, v)
+		}
 	}
 }
 
@@ -40,7 +50,7 @@ func main() {
 		}
 	})
 
-	// 监听服务
+	// 监听服务发现
 	rw, err := registerDrive.Watch(func(wop *registry.WatchOptions) {
 		wop = &registry.WatchOptions{
 			Service: "aaaa", // 无效, 原因未知
@@ -50,7 +60,7 @@ func main() {
 	if err == nil {
 		go func() {
 			for {
-				rr, err2 := rw.Next()
+				rr, err2 := rw.Next() // Next 是阻塞函数
 				if err2 == nil {
 					DumpRegistryResult(rr)
 				}
