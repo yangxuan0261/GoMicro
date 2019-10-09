@@ -8,7 +8,10 @@ require (
 	github.com/coreos/etcd v3.3.15+incompatible // indirect
 	github.com/golang/protobuf v1.3.2
 	github.com/micro/go-micro v1.11.0
-	github.com/micro/go-plugins v1.3.0 // indirect
+	github.com/micro/go-plugins v1.3.0
+	github.com/micro/micro v1.8.0
 	go.etcd.io/etcd v3.3.15+incompatible
 	go.uber.org/multierr v1.2.0 // indirect
 )
+
+replace github.com/micro/go-plugins => ../github.com/micro/go-plugins
