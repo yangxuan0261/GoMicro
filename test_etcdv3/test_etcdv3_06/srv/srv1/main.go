@@ -15,7 +15,7 @@ type Say struct{}
 
 func (s *Say) Hello(ctx context.Context, req *demo.Request, rsp *demo.Response) error {
 	log.Print("Received Say.Hello request")
-	rsp.Msg = "Hello " + req.Name + " srv one. rand:" + string(rand.Intn(256))
+	rsp.Msg = "Hello " + req.Name + ", --- srv one. rand:" + string(rand.Intn(256))
 	return nil
 }
 

@@ -5,12 +5,13 @@ import (
 	"log"
 	"strings"
 
+	demo "GoMicro/test_etcdv3/test_etcdv3_06/srv/proto/demo"
 	"context"
+
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/errors"
 	_ "github.com/micro/go-plugins/registry/etcdv3"
 	api "github.com/micro/micro/api/proto"
-	demo "GoMicro/test_etcdv3/test_etcdv3_06/srv/proto/demo"
 )
 
 type Say struct {
@@ -35,7 +36,7 @@ func (s *Say) Hello(ctx context.Context, req *api.Request, rsp *api.Response) er
 	rsp.StatusCode = 200
 	b, _ := json.Marshal(map[string]string{
 		"message": response.Msg,
-		"api": "api one",
+		"api":     "--- api one",
 	})
 	rsp.Body = string(b)
 

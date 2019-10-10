@@ -36,7 +36,7 @@ func (s *Say) Hello(ctx context.Context, req *api.Request, rsp *api.Response) er
 	rsp.StatusCode = 200
 	b, _ := json.Marshal(map[string]string{
 		"message": response.Msg,
-		"api":     "api two",
+		"api":     "--- api two",
 	})
 	rsp.Body = string(b)
 
