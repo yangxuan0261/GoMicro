@@ -14,4 +14,4 @@ require (
 	go.uber.org/multierr v1.2.0 // indirect
 )
 
-replace github.com/micro/go-plugins => ../github.com/micro/go-plugins
+replace github.com/micro/go-micro => ./vendor/github.com/micro/go-micro
