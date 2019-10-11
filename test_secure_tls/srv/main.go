@@ -24,13 +24,6 @@ func (s *Say) Hello(ctx context.Context, req *hello.Request, rsp *hello.Response
 }
 
 func loadTlsConfig() *tls.Config {
-	// cert, err := tls.LoadX509KeyPair("server.pem", "server.key")
-	// if err != nil {
-	// 	log.Println(err)
-	// 	return
-	// }
-	// config := &tls.Config{Certificates: []tls.Certificate{cert}}
-
 	cert, err := tls.LoadX509KeyPair("../conf/server.pem", "../conf/server.key")
 	if err != nil {
 		log.Fatalf("tls.LoadX509KeyPair err: %v", err)
