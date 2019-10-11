@@ -16,7 +16,7 @@ import (
 )
 
 func loadTlsConfig() *tls.Config {
-	cert, err := tls.LoadX509KeyPair("../conf/client.pem", "../conf/client.key")
+	cert, err := tls.LoadX509KeyPair("../conf/server.pem", "../conf/server.key")
 	if err != nil {
 		log.Fatalf("tls.LoadX509KeyPair err: %v", err)
 	}
