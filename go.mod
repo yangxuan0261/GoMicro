@@ -11,6 +11,8 @@ require (
 	github.com/micro/go-plugins v1.3.0
 	github.com/micro/micro v1.11.1
 	go.etcd.io/etcd v3.3.16+incompatible
+	golang.org/x/net v0.0.0-20190724013045-ca1201d0de80
+	google.golang.org/grpc v1.22.1
 )
 
 // replace github.com/micro/go-micro => ../vendor/github.com/micro/go-micro

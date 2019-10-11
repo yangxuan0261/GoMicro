@@ -21,9 +21,17 @@ func (u *User) Hello(ctx context.Context, req *proto.Request, res *proto.Respons
 }
 
 func main() {
-	service := micro.NewService(
+	var service micro.Service
+
+	afterFunc := func() error {
+		fmt.Println("--- afterFunc")
+		return nil
+	}
+
+	service = micro.NewService(
 		micro.Name("user"),
 		micro.Transport(grpc.NewTransport()),
+		micro.AfterStart(afterFunc),
 	)
 
 	service.Init()
