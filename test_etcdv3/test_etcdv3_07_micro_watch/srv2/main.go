@@ -24,10 +24,6 @@ func (s *Say) Hello(ctx context.Context, req *demo.Request, rsp *demo.Response) 
 
 func DumpRegistryResult(rr *registry.Result) {
 	log.Printf("------ watch, action: [%s], service:%v\n", rr.Action, rr.Service)
-	log.Printf("--- Metadata, len:%d\n", len(rr.Service.Metadata))
-	for k, v := range rr.Service.Metadata {
-		log.Printf("Metadata, k:%s, v:%s\n", k, v)
-	}
 
 	log.Printf("--- Endpoints, len:%d\n", len(rr.Service.Endpoints))
 	for i, v := range rr.Service.Endpoints {
@@ -51,10 +47,8 @@ func main() {
 	})
 
 	rw, err := registerDrive.Watch(func(wop *registry.WatchOptions) {
-		wop = &registry.WatchOptions{
-			Service: "aaaa",
-			Context: context.Background(),
-		}
+		wop.Service = ""
+		wop.Context = context.Background()
 	})
 	if err == nil {
 		go func() {
@@ -71,7 +65,6 @@ func main() {
 		"ccc": "333",
 		"ddd": "444",
 	}
-	_ = metaData
 
 	service := micro.NewService(
 		micro.Name("go.micro.srv.greeter"),

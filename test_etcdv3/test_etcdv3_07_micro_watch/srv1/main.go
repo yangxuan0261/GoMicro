@@ -24,10 +24,6 @@ func (s *Say) Hello(ctx context.Context, req *demo.Request, rsp *demo.Response) 
 
 func DumpRegistryResult(rr *registry.Result) {
 	log.Printf("------ watch, action: [%s], service:%v\n", rr.Action, rr.Service)
-	log.Printf("--- Metadata, len:%d\n", len(rr.Service.Metadata))
-	for k, v := range rr.Service.Metadata {
-		log.Printf("Metadata, k:%s, v:%s\n", k, v)
-	}
 
 	log.Printf("--- Endpoints, len:%d\n", len(rr.Service.Endpoints))
 	for i, v := range rr.Service.Endpoints {
@@ -52,10 +48,8 @@ func main() {
 
 	// 监听服务发现
 	rw, err := registerDrive.Watch(func(wop *registry.WatchOptions) {
-		wop = &registry.WatchOptions{
-			Service: "aaaa", // 无效, 原因未知
-			Context: context.Background(),
-		}
+		wop.Service = "" // 指定监听的服务, 空位监听所有
+		wop.Context = context.Background()
 	})
 	if err == nil {
 		go func() {
@@ -68,16 +62,30 @@ func main() {
 		}()
 	}
 
+	// 获取已有服务信息
+	log.Printf("--- GetService\n")
+	if rsArr, err := registerDrive.GetService("go.micro.srv.greeter"); err == nil {
+		for _, rs := range rsArr {
+			log.Printf("--- GetService, Nodes, len:%d\n", len(rs.Nodes))
+			for i, v := range rs.Nodes { // 发现的 服务 都在 Nodes 中
+				log.Printf("Nodes, i:%d, Id:%s, Address:%s\n", i, v.Id, v.Address)
+				for k, v := range v.Metadata {
+					log.Printf("Metadata, k:%s, v:%s\n", k, v)
+				}
+			}
+		}
+
+	}
+
 	metaData := map[string]string{
 		"aaa": "111",
 		"bbb": "222",
 	}
-	_ = metaData
 
 	service := micro.NewService(
 		micro.Name("go.micro.srv.greeter"),
 		micro.Version("1.0.1"),
-		micro.Metadata(metaData), // 无效, 原因未知
+		micro.Metadata(metaData),
 		micro.Registry(registerDrive),
 		micro.RegisterTTL(time.Second*10),
 		micro.RegisterInterval(time.Second*5),
