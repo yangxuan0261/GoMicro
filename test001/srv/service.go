@@ -23,6 +23,14 @@ func main() {
 
 	service.Init()
 
+	fmt.Println("--- service id:", service.String())
+
+	confSrv := service.Server().Options()
+	fmt.Printf("--- confSrv:%+v\n", confSrv)
+
+	confCli := service.Client().Options()
+	fmt.Printf("--- confCli:%+v\n", confCli)
+
 	proto.RegisterUserHandler(service.Server(), new(User))
 
 	if err := service.Run(); err != nil {

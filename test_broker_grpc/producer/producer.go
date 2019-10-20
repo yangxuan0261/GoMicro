@@ -12,7 +12,7 @@ import (
 )
 
 var (
-	topic = "go.micro.topic.foo"
+	topic = "topic.aaa.bbb.TpTest"
 )
 
 var grpcBroker broker.Broker
@@ -51,7 +51,7 @@ func main() {
 
 	go pub()
 	service := micro.NewService(
-		micro.Name("test_broker_grpc_producer"),
+		micro.Name("com.a.aaa_producer"),
 		micro.Broker(grpcBroker),
 	)
 

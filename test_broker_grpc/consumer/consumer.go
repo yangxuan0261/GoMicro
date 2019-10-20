@@ -16,7 +16,7 @@ import (
 // 默认使用的是 http
 
 var (
-	topic = "go.micro.topic.foo"
+	topic = "topic.aaa.bbb.TpTest"
 )
 
 var grpcBroker broker.Broker
@@ -47,7 +47,7 @@ func main() {
 	go sub()
 
 	service := micro.NewService(
-		micro.Name("test_broker_grpc_consumer"),
+		micro.Name("com.aaa.bbb.SrvGame"),
 		micro.Broker(grpcBroker),
 	)
 
