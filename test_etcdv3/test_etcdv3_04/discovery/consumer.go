@@ -79,7 +79,15 @@ func (c *Consumer) watch() {
 	for w := range wch {
 		for _, ev := range w.Events {
 			switch ev.Type {
+
 			case clientv3.EventTypePut:
+				var action string
+				if ev.IsCreate() {
+					action = "create"
+				} else if ev.IsModify() {
+					action = "update"
+				}
+				log.Printf("--- action:%s\n", action)
 				c.addNode(string(ev.Kv.Key), string(ev.Kv.Value))
 			case clientv3.EventTypeDelete:
 				c.removeNode(ev)

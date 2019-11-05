@@ -86,9 +86,9 @@ func main() {
 		micro.Name("go.micro.srv.greeter"),
 		micro.Version("1.0.1"),
 		micro.Metadata(metaData),
+		micro.RegisterTTL(time.Second*3),
+		micro.RegisterInterval(time.Second*2),
 		micro.Registry(registerDrive),
-		micro.RegisterTTL(time.Second*10),
-		micro.RegisterInterval(time.Second*5),
 	)
 	// optionally setup command line usage
 	service.Init()
