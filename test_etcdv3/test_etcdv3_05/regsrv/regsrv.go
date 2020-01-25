@@ -1,7 +1,7 @@
 package main
 
 import (
-	dis "GoMicro/test_etcdv3/test_etcdv3_05/discovery"
+	dis "go-micro/test_etcdv3/test_etcdv3_05/discovery"
 	"time"
 )
 

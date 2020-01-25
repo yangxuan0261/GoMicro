@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 
-	demo "GoMicro/test_etcdv3/test_etcdv3_06/srv/proto/demo"
+	demo "go-micro/test_etcdv3/test_etcdv3_06/srv/proto/demo"
 
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/registry"

@@ -9,7 +9,7 @@ import (
 
 	"context"
 
-	hello "GoMicro/test_secure_tls/srv/proto/hello"
+	hello "go-micro/test_secure_tls/srv/proto/hello"
 
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/transport"

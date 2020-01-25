@@ -1,7 +1,7 @@
 package main
 
 import (
-	"GoMicro/test_etcdv3/test_etcdv3_04/discovery"
+	"go-micro/test_etcdv3/test_etcdv3_04/discovery"
 	"flag"
 	"log"
 )

@@ -14,5 +14,3 @@ require (
 	golang.org/x/net v0.0.0-20190930134127-c5a3c61f89f3
 	google.golang.org/grpc v1.24.0
 )
-
-replace github.com/micro/go-micro => ../github.com/micro/go-micro

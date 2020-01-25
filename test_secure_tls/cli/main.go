@@ -10,7 +10,7 @@ import (
 	"github.com/micro/go-micro/client"
 	"github.com/micro/go-micro/transport"
 
-	hello "GoMicro/test_secure_tls/srv/proto/hello"
+	hello "go-micro/test_secure_tls/srv/proto/hello"
 
 	"context"
 )

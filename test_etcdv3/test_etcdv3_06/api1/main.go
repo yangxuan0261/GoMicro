@@ -5,7 +5,7 @@ import (
 	"log"
 	"strings"
 
-	demo "GoMicro/test_etcdv3/test_etcdv3_06/srv/proto/demo"
+	demo "go-micro/test_etcdv3/test_etcdv3_06/srv/proto/demo"
 	"context"
 
 	"github.com/micro/go-micro"

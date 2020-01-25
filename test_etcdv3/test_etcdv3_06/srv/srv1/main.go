@@ -1,7 +1,7 @@
 package main
 
 import (
-	demo "GoMicro/test_etcdv3/test_etcdv3_06/srv/proto/demo"
+	demo "go-micro/test_etcdv3/test_etcdv3_06/srv/proto/demo"
 	"context"
 	"log"
 	"math/rand"

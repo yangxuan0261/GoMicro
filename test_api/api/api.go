@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"strings"
 
-	proto "GoMicro/test_api/api/proto"
+	proto "go-micro/test_api/api/proto"
 
 	"github.com/micro/go-micro"
 	api "github.com/micro/go-micro/api/proto"
