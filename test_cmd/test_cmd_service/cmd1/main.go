@@ -8,20 +8,20 @@ import (
 
 	"github.com/micro/go-micro"
 
-	proto "github.com/micro/go-micro/agent/proto"
+	pb "github.com/micro/go-micro/agent/proto"
 )
 
 type Command struct{}
 
 // Help returns the command usage
-func (c *Command) Help(ctx context.Context, req *proto.HelpRequest, rsp *proto.HelpResponse) error {
+func (c *Command) Help(ctx context.Context, req *pb.HelpRequest, rsp *pb.HelpResponse) error {
 	rsp.Usage = "wilker"
 	rsp.Description = "This is an example bot command as a micro service wilker"
 	return nil
 }
 
 // Exec executes the command
-func (c *Command) Exec(ctx context.Context, req *proto.ExecRequest, rsp *proto.ExecResponse) error {
+func (c *Command) Exec(ctx context.Context, req *pb.ExecRequest, rsp *pb.ExecResponse) error {
 	for i, val := range req.Args {
 		fmt.Printf("--- i:%d, val:%s\n", i, val)
 	}
@@ -38,7 +38,7 @@ func main() {
 
 	service.Init()
 
-	proto.RegisterCommandHandler(service.Server(), new(Command))
+	pb.RegisterCommandHandler(service.Server(), new(Command))
 
 	if err := service.Run(); err != nil {
 		fmt.Println(err)

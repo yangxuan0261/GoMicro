@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	micro "github.com/micro/go-micro"
+	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/broker"
 	"github.com/micro/go-micro/config/cmd"
 	"github.com/micro/go-plugins/broker/grpc"
